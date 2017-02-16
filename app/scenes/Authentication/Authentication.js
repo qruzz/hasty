@@ -7,6 +7,7 @@ import {
    Image
 } from 'react-native'
 
+// npm library imports
 import { Actions } from 'react-native-router-flux'
 import FBSDK, {
    LoginManager,
@@ -15,73 +16,44 @@ import FBSDK, {
    GraphRequestManager
 } from 'react-native-fbsdk'
 
+// user defined scenes, components, and services
 import ViewContainer from '../../components/ViewContainer.js'
+import { firebaseRef } from '../../services/Firebase.js'
 
 export default class Authentication extends Component {
    constructor(props) {
       super(props)
-
-      this.state = {
-         accessToken: ''
-      }
-
-      this._fbAuth = this._fbAuth.bind(this)
-      this._graphProfileRequest = this._graphProfileRequest.bind(this)
-      this._responseInfoCallback = this._responseInfoCallback.bind(this)
-   }
-
-   _responseInfoCallback(error: ?Object, result: ?Object) {
-      if (error) {
-         alert('Error fetching data: ' + error.toString())
-      } else {
-         console.log('Success fetching data: ' + result.toString())
-      }
-   }
-
-   _graphProfileRequest() {
-
-      const profileRequestParams = {
-         parameters: {
-            fields: {
-               string: 'id, name, email, first_name, last_name'
-            }
-         }
-      }
-
-      const profileRequestConfig = {
-         httpMethod: 'GET',
-         version: 'v2.5',
-         parameters: profileRequestParams,
-         accessToken: this.state.accessToken.toString()
-      }
-
-      const profileRequest = new GraphRequest(
-         '/me',
-         {
-            accessToken: this.state.accessToken.toString(),
-            parameters: {
-               fields: {
-                  string: 'id, name, email, first_name, last_name'
-               }
-            }
-         },
-         this._responseInfoCallback
-      )
-
-      new GraphRequestManager().addRequest(profileRequest).start()
    }
 
    _fbAuth() {
-      var self = this
-      LoginManager.logInWithReadPermissions(['public_profile']).then(function(result) {
+      LoginManager.logInWithReadPermissions(['public_profile', 'email']).then(function(result) {
          if (result.isCancelled) {
             alert('Login was cancelled')
          } else {
             AccessToken.getCurrentAccessToken().then(function(accessTokenData) {
-               self.setState({accessToken: accessTokenData.accessToken})
-               console.log(self.state.accessToken)
 
-               self._graphProfileRequest()
+               const responseInfoCallback = (error, result) => {
+                  if (error) {
+                     console.log(error)
+                  } else {
+                     console.log(result)
+                  }
+               }
+
+               const infoRequest = new GraphRequest(
+                  '/me',
+                  {
+                     accessToken: accessTokenData.accessToken.toString(),
+                     parameters: {
+                        fields: {
+                           string: 'id, name, email, first_name, last_name'
+                        }
+                     }
+                  },
+                  responseInfoCallback
+               )
+
+               new GraphRequestManager().addRequest(infoRequest).start()
 
                // Actions.tabbar()
             })
