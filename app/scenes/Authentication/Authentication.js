@@ -18,7 +18,6 @@ import FBSDK, {
 
 // user defined scenes, components, and services
 import ViewContainer from '../../components/ViewContainer.js'
-import { writeUserData } from '../../services/Firebase.js'
 import { _fbAuth } from './Functions.js'
 
 export default class Authentication extends Component {

@@ -12,6 +12,7 @@ import { Router, Scene } from 'react-native-router-flux'
 import Authentication from './scenes/Authentication/Authentication.js'
 import Location from './scenes/MapView/Location.js'
 import TabBar from './scenes/MapView/TabBar.js'
+import Profile from './scenes/Profile.js'
 
 export default class App extends Component {
    render() {
@@ -21,7 +22,7 @@ export default class App extends Component {
                <Scene
                   key={'authentication'}
                   component={Authentication}
-                  initial={true}
+                  // initial={true}
                   hideNavBar={true} />
                <Scene
                   key={'location'}
@@ -31,6 +32,11 @@ export default class App extends Component {
                <Scene
                   key={'tabbar'}
                   component={TabBar}
+                  initial={true}
+                  hideNavBar={true} />
+               <Scene
+                  key={'profile'}
+                  component={Profile}
                   // initial={true}
                   hideNavBar={true} />
             </Scene>

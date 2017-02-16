@@ -20,7 +20,6 @@ export function _fbAuth() {
                if (error) {
                   console.log(error)
                } else {
-
                   writeUserData(result.id, result.first_name, result.last_name, result.email, result.picture.data.url)
                }
             }
