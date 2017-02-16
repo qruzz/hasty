@@ -4,14 +4,10 @@ import {
    StyleSheet
 } from 'react-native'
 
-import StatusbarBackground from './StatusbarBackground.js'
-
 export default class ViewContainer extends Component {
     render() {
         return (
             <View style={styles.viewContainer}>
-               <StatusbarBackground />
-
                {this.props.children}
             </View>
         )
