@@ -9,6 +9,8 @@ import FBSDK, {
    GraphRequestManager
 } from 'react-native-fbsdk'
 
+export var userID = ''
+
 export function _fbAuth() {
    LoginManager.logInWithReadPermissions(['public_profile', 'email']).then(function(result) {
       if (result.isCancelled) {
@@ -20,6 +22,7 @@ export function _fbAuth() {
                if (error) {
                   console.log(error)
                } else {
+                  userID = result.id
                   writeUserData(result.id, result.first_name, result.last_name, result.email, result.picture.data.url)
                }
             }

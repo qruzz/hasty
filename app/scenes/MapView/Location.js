@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import {
    View,
    StyleSheet,
-   Dimensions
+   Dimensions,
+   Text
 } from 'react-native'
 
+// user defined scenes, components, and services
 import MapView from 'react-native-maps'
 import ViewContainer from '../../components/ViewContainer.js'
 
@@ -23,6 +25,9 @@ export default class Location extends Component {
       super(props)
 
       this.state = {
+         initialPosition: 'unknown',
+         lastPosition: 'unknown',
+
          region: {
             latitude: LATITUDE,
             longitude: LONGITUDE,
@@ -31,6 +36,27 @@ export default class Location extends Component {
          }
       }
    }
+
+   watchID: ?number = null
+
+   componentDidMount() {
+      navigator.geolocation.getCurrentPosition((position) => {
+         var initialPosition = JSON.stringify(position)
+         this.setState({initialPosition: initialPosition})
+      },
+      (error) => alert(JSON.stringify(error)),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000})
+
+      this.watchID = navigator.geolocation.watchPosition((position) => {
+         var lastPosition = JSON.stringify(position);
+         this.setState({lastPosition});
+      });
+   }
+
+   componentWillUnmount() {
+      navigator.geolocation.clearWatch(this.watchID);
+   }
+
 
    render() {
       return (
@@ -45,11 +71,11 @@ export default class Location extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        position: 'relative',
-        height: SCREEN_HEIGHT - 40
-    },
-    map: {
+   container: {
+      position: 'relative',
+      height: SCREEN_HEIGHT - 40
+   },
+   map: {
       left: 0,
       right: 0,
       top: 0,

@@ -8,9 +8,11 @@ import {
 
 import Icon from 'react-native-vector-icons/Ionicons'
 
-import Location from './Location.js'
-import ViewContainer from '../../components/ViewContainer.js'
-import Profile from '../Profile.js'
+// user defined scenes, components, and services
+import ViewContainer from '../components/ViewContainer.js'
+import Profile from './Profile/Profile.js'
+import Location from './MapView/Location.js'
+import Receipts from './Receipts/Receipts.js'
 
 export default class TabBar extends Component {
    constructor(props) {
@@ -18,6 +20,7 @@ export default class TabBar extends Component {
 
       this.state = {
          selectedTab: 'explore'
+         // selectedTab: 'profile'
       }
    }
 
@@ -28,15 +31,21 @@ export default class TabBar extends Component {
                   <Icon.TabBarItemIOS
                      title="Receipts"
                      iconName={"ios-filing"}
-                     selected={this.state.selectedTab === 'receipts'}>
+                     selected={this.state.selectedTab === 'receipts'}
+                     onPress={() => {
+                        this.setState({selectedTab: 'receipts'})
+                     }}>
 
-
+                     <Receipts />
                   </Icon.TabBarItemIOS>
 
                   <Icon.TabBarItemIOS
                      title="Explore"
                      iconName={"ios-compass"}
-                     selected={this.state.selectedTab === 'explore'}>
+                     selected={this.state.selectedTab === 'explore'}
+                     onPress={() => {
+                        this.setState({selectedTab: 'explore'})
+                     }}>
 
                      <Location />
                   </Icon.TabBarItemIOS>
@@ -44,7 +53,10 @@ export default class TabBar extends Component {
                   <Icon.TabBarItemIOS
                      title="Profile"
                      iconName={"ios-contact"}
-                     selected={this.state.selectedTab === 'profile'}>
+                     selected={this.state.selectedTab === 'profile'}
+                     onPress={() => {
+                        this.setState({selectedTab: 'profile'})
+                     }}>
 
                      <Profile />
                   </Icon.TabBarItemIOS>

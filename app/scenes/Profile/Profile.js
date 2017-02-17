@@ -3,12 +3,16 @@ import {
    View,
    Text,
    Image,
-   StyleSheet
+   StyleSheet,
+   TouchableOpacity
 } from 'react-native'
 
-import ViewContainer from '../components/ViewContainer.js'
-import { database } from '../services/Firebase.js'
-import { userID } from './Authentication/Functions.js'
+// user defined scenes, components, and services
+import ViewContainer from '../../components/ViewContainer.js'
+import StatusbarBackground from '../../components/StatusbarBackground.js'
+
+import { database } from '../../services/Firebase.js'
+import { userID } from '../Authentication/Functions.js'
 
 export default class Profile extends Component {
    constructor(props) {
@@ -20,22 +24,24 @@ export default class Profile extends Component {
          picture: ''
       }
 
+      // TODO: Append users with + userID
       database.ref('/users/10212492588289260').once('value').then(function(snapshot) {
          this.setState({firstName: snapshot.val().first_name})
          this.setState({lastName: snapshot.val().last_name})
          this.setState({picture: snapshot.val().profile_picture})
-         console.log("Inside: " + snapshot.val().profile_picture);
       }.bind(this))
    }
 
    render() {
       return (
          <ViewContainer>
+            <StatusbarBackground />
+
             <View style={styles.profile}>
                <View style={styles.profilePicture}>
-                  <Image source={{uri: this.state.picture}} />
+                  <Image style={styles.picture} source={{uri: this.state.picture}} />
                </View>
-               
+
                <View style={styles.information}>
                   <Text style={styles.name}>{this.state.firstName} {this.state.lastName}</Text>
                   <Text style={styles.preferences}>likes flat whites</Text>
@@ -43,6 +49,7 @@ export default class Profile extends Component {
             </View>
 
             <View style={styles.payment}>
+
             </View>
          </ViewContainer>
       )
@@ -51,11 +58,16 @@ export default class Profile extends Component {
 
 const styles = StyleSheet.create({
    profile: {
-
+      flex: 1,
+      flexDirection: 'row'
    },
    profilePicture: {
       height: 50,
       width: 50,
+   },
+   picture: {
+      height: 50,
+      width: 50
    },
    information: {
 

@@ -11,8 +11,8 @@ import { Router, Scene } from 'react-native-router-flux'
 // user defined scenes, components, and services
 import Authentication from './scenes/Authentication/Authentication.js'
 import Location from './scenes/MapView/Location.js'
-import TabBar from './scenes/MapView/TabBar.js'
-import Profile from './scenes/Profile.js'
+import TabBar from './scenes/TabBar.js'
+import Profile from './scenes/Profile/Profile.js'
 
 export default class App extends Component {
    render() {
