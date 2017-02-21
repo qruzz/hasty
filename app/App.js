@@ -12,7 +12,7 @@ import { Router, Scene } from 'react-native-router-flux'
 import Authentication from './scenes/Authentication/Authentication.js'
 import Location from './scenes/MapView/Location.js'
 import TabBar from './scenes/TabBar.js'
-import Profile from './scenes/Profile/Profile.js'
+import ProfileView from './scenes/Profile/ProfileView.js'
 
 export default class App extends Component {
    render() {
@@ -36,7 +36,7 @@ export default class App extends Component {
                   hideNavBar={true} />
                <Scene
                   key={'profile'}
-                  component={Profile}
+                  component={ProfileView}
                   // initial={true}
                   hideNavBar={true} />
             </Scene>

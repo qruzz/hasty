@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 
 // user defined scenes, components, and services
 import ViewContainer from '../components/ViewContainer.js'
-import Profile from './Profile/Profile.js'
+import ProfileView from './Profile/ProfileView.js'
 import Location from './MapView/Location.js'
 import Receipts from './Receipts/Receipts.js'
 
@@ -60,7 +60,7 @@ export default class TabBar extends Component {
                         this.setState({selectedTab: 'account'})
                      }}>
 
-                     <Profile />
+                     <ProfileView />
                   </TabBarIOS.Item>
 
                </TabBarIOS>
