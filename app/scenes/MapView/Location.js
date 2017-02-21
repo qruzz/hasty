@@ -25,45 +25,77 @@ export default class Location extends Component {
       super(props)
 
       this.state = {
-         initialPosition: 'unknown',
-         lastPosition: 'unknown',
+         initialPosition: {
+            latitude: 0,
+            longitude: 0,
+            latitudeDelta: 0,
+            longitudeDelta: 0
+         },
+         lastPosition: {
+            latitude: 0,
+            longitude: 0,
+            latitudeDelta: 0,
+            longitudeDelta: 0
+         },
 
-         region: {
-            latitude: LATITUDE,
-            longitude: LONGITUDE,
-            latitudeDelta: LATITUDE_DELTA,
-            longitudeDelta: LONGITUDE_DELTA,
-         }
+         // region: {
+         //    latitude: LATITUDE,
+         //    longitude: LONGITUDE,
+         //    latitudeDelta: LATITUDE_DELTA,
+         //    longitudeDelta: LONGITUDE_DELTA,
+         // }
       }
+
+      this.onRegionChange = this.onRegionChange.bind(this)
    }
 
    watchID: ?number = null
 
    componentDidMount() {
       navigator.geolocation.getCurrentPosition((position) => {
-         var initialPosition = JSON.stringify(position)
-         this.setState({initialPosition: initialPosition})
+         var lat = parseFloat(position.coords.latitude)
+         var long = parseFloat(position.coords.longitude)
+         var initialRegion = {
+            latitude: lat,
+            longitude: long,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA
+         }
+
+         this.setState({initialPosition: initialRegion})
+         // console.log(this.state.region);
+         console.log(this.state.initialPosition)
       },
       (error) => alert(JSON.stringify(error)),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000})
 
       this.watchID = navigator.geolocation.watchPosition((position) => {
-         var lastPosition = JSON.stringify(position);
-         this.setState({lastPosition});
-      });
+         var lat = parseFloat(position.coords.latitude)
+         var long = parseFloat(position.coords.longitude)
+         var lastRegion = {
+            latitude: lat,
+            longitude: long,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA
+         }
+         this.setState({initialPosition: lastRegion})
+      })
+   }
+
+   onRegionChange(region) {
+      this.setState({region});
    }
 
    componentWillUnmount() {
       navigator.geolocation.clearWatch(this.watchID);
    }
 
-
    render() {
       return (
          <View style={styles.container}>
             <MapView
                style={styles.map}
-               initialRegion={this.state.region}
+               region={this.state.initialPosition}
             />
          </View>
       )
