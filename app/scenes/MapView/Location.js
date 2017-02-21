@@ -6,16 +6,16 @@ import {
    Text
 } from 'react-native'
 
-// user defined scenes, components, and services
+// npm library imports
 import MapView from 'react-native-maps'
+
+// user defined scenes, components, and services
 import ViewContainer from '../../components/ViewContainer.js'
 
 const { width, height } = Dimensions.get('window')
 const SCREEN_WIDTH = width
 const SCREEN_HEIGHT = height
 const ASPECT_RATIO = width / height
-const LATITUDE = 54.913811
-const LONGITUDE = 9.792178
 const LATITUDE_DELTA = 0.0922
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
 
@@ -31,30 +31,31 @@ export default class Location extends Component {
             latitudeDelta: 0,
             longitudeDelta: 0
          },
+         markerPosition: {
+            latitude: 0,
+            longitude: 0
+         },
          lastPosition: {
             latitude: 0,
             longitude: 0,
             latitudeDelta: 0,
             longitudeDelta: 0
-         },
-
-         // region: {
-         //    latitude: LATITUDE,
-         //    longitude: LONGITUDE,
-         //    latitudeDelta: LATITUDE_DELTA,
-         //    longitudeDelta: LONGITUDE_DELTA,
-         // }
+         }
       }
-
-      this.onRegionChange = this.onRegionChange.bind(this)
    }
 
+   // Specifies the unique ID of the watchPosition call to cancel. The ID is returned by the watchPosition call.
    watchID: ?number = null
 
+   // Call when the component mounted
    componentDidMount() {
+      // Get the current position from the build in geolocation chip, and store in state
       navigator.geolocation.getCurrentPosition((position) => {
+         // Parse the position variables to floats
          var lat = parseFloat(position.coords.latitude)
          var long = parseFloat(position.coords.longitude)
+
+         // Create object with the current position
          var initialRegion = {
             latitude: lat,
             longitude: long,
@@ -62,30 +63,34 @@ export default class Location extends Component {
             longitudeDelta: LONGITUDE_DELTA
          }
 
+         // Set the current position and the marker in sate
          this.setState({initialPosition: initialRegion})
-         // console.log(this.state.region);
-         console.log(this.state.initialPosition)
+         this.setState({markerPosition: initialRegion})
       },
       (error) => alert(JSON.stringify(error)),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000})
 
+      // Create a event watcher for changes in position from the geolocation chip
       this.watchID = navigator.geolocation.watchPosition((position) => {
+         // Parse the position variables to floats
          var lat = parseFloat(position.coords.latitude)
          var long = parseFloat(position.coords.longitude)
+
+         // Create object with the current position
          var lastRegion = {
             latitude: lat,
             longitude: long,
             latitudeDelta: LATITUDE_DELTA,
             longitudeDelta: LONGITUDE_DELTA
          }
+
+         // Set the current position and the marker in sate
          this.setState({initialPosition: lastRegion})
+         this.setState({markerPosition: lastRegion})
       })
    }
 
-   onRegionChange(region) {
-      this.setState({region});
-   }
-
+   // Will stop watching for changes in position when the component is unmounted
    componentWillUnmount() {
       navigator.geolocation.clearWatch(this.watchID);
    }
@@ -96,7 +101,11 @@ export default class Location extends Component {
             <MapView
                style={styles.map}
                region={this.state.initialPosition}
-            />
+            >
+               <MapView.Marker
+                  coordinate={this.state.markerPosition}
+               />
+            </MapView>
          </View>
       )
    }

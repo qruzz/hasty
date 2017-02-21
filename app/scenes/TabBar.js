@@ -19,47 +19,49 @@ export default class TabBar extends Component {
       super(props)
 
       this.state = {
-         selectedTab: 'explore'
-         // selectedTab: 'profile'
+         // selectedTab: 'discover'
+         selectedTab: 'account'
       }
    }
 
     render() {
         return (
             <ViewContainer>
-               <TabBarIOS>
-                  <Icon.TabBarItemIOS
+               <TabBarIOS
+                  barTintColor="white"
+                  tintColor="#FB5353">
+                  <TabBarIOS.Item
                      title="Receipts"
-                     iconName={"ios-filing"}
+                     icon={require('../resources/receipts@4x.png')}
                      selected={this.state.selectedTab === 'receipts'}
                      onPress={() => {
                         this.setState({selectedTab: 'receipts'})
                      }}>
 
                      <Receipts />
-                  </Icon.TabBarItemIOS>
+                  </TabBarIOS.Item>
 
-                  <Icon.TabBarItemIOS
-                     title="Explore"
-                     iconName={"ios-compass"}
-                     selected={this.state.selectedTab === 'explore'}
+                  <TabBarIOS.Item
+                     title="Discover"
+                     icon={require('../resources/discover@4x.png')}
+                     selected={this.state.selectedTab === 'discover'}
                      onPress={() => {
-                        this.setState({selectedTab: 'explore'})
+                        this.setState({selectedTab: 'discover'})
                      }}>
 
                      <Location />
-                  </Icon.TabBarItemIOS>
+                  </TabBarIOS.Item>
 
-                  <Icon.TabBarItemIOS
-                     title="Profile"
-                     iconName={"ios-contact"}
-                     selected={this.state.selectedTab === 'profile'}
+                  <TabBarIOS.Item
+                     title="Account"
+                     icon={require('../resources/account@4x.png')}
+                     selected={this.state.selectedTab === 'account'}
                      onPress={() => {
-                        this.setState({selectedTab: 'profile'})
+                        this.setState({selectedTab: 'account'})
                      }}>
 
                      <Profile />
-                  </Icon.TabBarItemIOS>
+                  </TabBarIOS.Item>
 
                </TabBarIOS>
             </ViewContainer>
