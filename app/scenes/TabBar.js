@@ -20,7 +20,8 @@ export default class TabBar extends Component {
 
       this.state = {
          // selectedTab: 'discover'
-         selectedTab: 'account'
+         // selectedTab: 'account'
+         selectedTab: 'receipts'
       }
    }
 
