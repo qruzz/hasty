@@ -3,19 +3,21 @@ import {
    View,
    StyleSheet,
    Text,
-   ListView,
-   TouchableOpacity
+   TouchableOpacity,
+   AlertIOS
 } from 'react-native'
 
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import _ from 'lodash'
 
-export default class ReceiptsListViewItem extends Component {
+export default class HistoryListViewItem extends Component {
    render() {
       return (
          <View style={styles.borderBottom}>
-            <TouchableOpacity style={styles.container}>
+            <TouchableOpacity style={styles.container} onPress={() => {
+               AlertIOS.alert('Testing something')
+            }}>
                <Text style={styles.venue}>
                   {_.capitalize(this.props.venue)}
                </Text>

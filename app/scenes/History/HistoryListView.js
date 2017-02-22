@@ -6,7 +6,7 @@ import {
    ListView
 } from 'react-native'
 
-import ReceiptsListViewItem from './ReceiptsListViewItem.js'
+import HistoryListViewItem from './HistoryListViewItem.js'
 
 export default class ReceiptsListView extends Component {
    constructor(props) {
@@ -25,7 +25,7 @@ export default class ReceiptsListView extends Component {
       return (
          <ListView
             dataSource={this.state.dataSource}
-            renderRow={(rowData) => <ReceiptsListViewItem venue={rowData} price="USD270"/>}
+            renderRow={(rowData) => <HistoryListViewItem venue={rowData} price="USD270"/>}
          />
       )
    }

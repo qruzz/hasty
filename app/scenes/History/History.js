@@ -9,9 +9,9 @@ import ViewContainer from '../../components/ViewContainer.js'
 import StatusbarBackground from '../../components/StatusbarBackground.js'
 import NavigationBar from '../../components/NavigationBar.js'
 
-import ReceiptsListView from './ReceiptsListView.js'
+import HistoryListView from './HistoryListView.js'
 
-export default class Receipts extends Component {
+export default class History extends Component {
    render() {
       return (
          <ViewContainer>
@@ -23,7 +23,7 @@ export default class Receipts extends Component {
                <Text style={styles.historyText}>HISTORY</Text>
             </View>
 
-            <ReceiptsListView />
+            <HistoryListView />
 
          </ViewContainer>
       )

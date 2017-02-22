@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import ViewContainer from '../components/ViewContainer.js'
 import ProfileView from './Profile/ProfileView.js'
 import Location from './MapView/Location.js'
-import Receipts from './Receipts/Receipts.js'
+import History from './History/History.js'
 
 export default class TabBar extends Component {
    constructor(props) {
@@ -21,7 +21,7 @@ export default class TabBar extends Component {
       this.state = {
          // selectedTab: 'discover'
          // selectedTab: 'account'
-         selectedTab: 'receipts'
+         selectedTab: 'history'
       }
    }
 
@@ -32,14 +32,14 @@ export default class TabBar extends Component {
                   barTintColor="white"
                   tintColor="#FB5353">
                   <TabBarIOS.Item
-                     title="Receipts"
+                     title="History"
                      icon={require('../resources/receipts@4x.png')}
-                     selected={this.state.selectedTab === 'receipts'}
+                     selected={this.state.selectedTab === 'history'}
                      onPress={() => {
-                        this.setState({selectedTab: 'receipts'})
+                        this.setState({selectedTab: 'history'})
                      }}>
 
-                     <Receipts />
+                     <History />
                   </TabBarIOS.Item>
 
                   <TabBarIOS.Item
