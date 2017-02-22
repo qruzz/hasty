@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 
 import _ from 'lodash'
 
-export default class HistoryListViewItem extends Component {
+export default class ReceiptsListViewItem extends Component {
    render() {
       return (
          <View style={styles.borderBottom}>

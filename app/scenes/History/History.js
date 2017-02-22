@@ -2,28 +2,46 @@ import React, { Component } from 'react'
 import {
    View,
    Text,
-   StyleSheet
+   StyleSheet,
+   SegmentedControlIOS
 } from 'react-native'
 
 import ViewContainer from '../../components/ViewContainer.js'
 import StatusbarBackground from '../../components/StatusbarBackground.js'
 import NavigationBar from '../../components/NavigationBar.js'
 
-import HistoryListView from './HistoryListView.js'
+import PlacesListView from './Places/PlacesListView.js'
 
 export default class History extends Component {
+   constructor(props) {
+      super(props)
+
+      this.state = {
+         selectedIndex: 0
+      }
+   }
+
    render() {
       return (
          <ViewContainer>
             <StatusbarBackground />
 
-            <NavigationBar title="Receipts" />
+            <NavigationBar title="History" />
 
-            <View style={styles.history}>
-               <Text style={styles.historyText}>HISTORY</Text>
-            </View>
+            <SegmentedControlIOS
+               style={styles.segmentedControl}
+               values={['Places', 'Receipts']}
+               selectedIndex={this.state.selectedIndex}
+               tintColor="#fb5353"
+               onChange={(event) => {
+                  this.setState({selectedIndex: event.nativeEvent.selectedSegmentIndex})
+                  console.log(this.state.selectedIndex)
+               }}
+            />
 
-            <HistoryListView />
+            <View style={styles.hairline} />
+
+            <PlacesListView />
 
          </ViewContainer>
       )
@@ -31,13 +49,14 @@ export default class History extends Component {
 }
 
 const styles = StyleSheet.create({
-   history: {
-      height: 45,
-      justifyContent: 'center'
+   segmentedControl: {
+      marginTop: 10,
+      marginBottom: 10,
+      marginLeft: 8,
+      marginRight: 8
    },
-   historyText: {
-      fontWeight: '600',
-      color: '#C8C7CD',
-      marginLeft: 20
+   hairline: {
+      height: 1,
+      backgroundColor: '#c8c8c8'
    }
 })
