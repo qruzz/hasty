@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
    profile: {
       alignItems: 'center',
       borderBottomWidth: 1,
-      borderColor: '#B2B2B2'
+      borderColor: '#c8c7cc'
    },
    profilePicture: {
       marginTop: 30,

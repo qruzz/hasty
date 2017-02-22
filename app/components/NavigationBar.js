@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
    navbar: {
       height: 64,
       borderBottomWidth: 1,
-      borderColor: '#B2B2B2',
+      borderColor: '#c8c7cc',
       alignItems: 'center'
    },
    navbarText: {

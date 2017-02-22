@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
    discoverable: {
       flexDirection: 'row',
       borderBottomWidth: 1,
-      borderColor: '#B2B2B2'
+      borderColor: '#c8c7cc'
    },
    discoverableText: {
       fontSize: 17,

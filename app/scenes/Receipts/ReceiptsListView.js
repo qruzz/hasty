@@ -6,6 +6,8 @@ import {
    ListView
 } from 'react-native'
 
+import ReceiptsListViewItem from './ReceiptsListViewItem.js'
+
 export default class ReceiptsListView extends Component {
    constructor(props) {
       super(props)
@@ -18,12 +20,12 @@ export default class ReceiptsListView extends Component {
          dataSource: ds.cloneWithRows(['row 1', 'row 2'])
       }
    }
-   
+
    render() {
       return (
          <ListView
             dataSource={this.state.dataSource}
-            renderRow={(rowData) => <Text>{rowData}</Text>}
+            renderRow={(rowData) => <ReceiptsListViewItem venue={rowData} price="USD270"/>}
          />
       )
    }
