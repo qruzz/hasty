@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
       alignItems: 'center'
    },
    navbarText: {
-      fontSize: 17,
+      fontSize: 19,
       color: '#FB5353',
       marginTop: 32
    }

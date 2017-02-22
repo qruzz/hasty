@@ -6,6 +6,8 @@ import {
    ListView
 } from 'react-native'
 
+import data from '../../../services/Places.json'
+
 import PlacesListViewItem from './PlacesListViewItem.js'
 
 export default class PlacesListView extends Component {
@@ -17,15 +19,22 @@ export default class PlacesListView extends Component {
       })
 
       this.state = {
-         dataSource: ds.cloneWithRows(['row 1', 'row 2'])
+         // dataSource: ds.cloneWithRows(['row 1', 'row 2'])
+         dataSource: ds.cloneWithRows(data.places)
       }
+   }
+
+   _renderRow(rowData) {
+      return (
+         <PlacesListViewItem name={rowData.name} coverPhoto={rowData.cover_photo}/>
+      )
    }
 
    render() {
       return (
          <ListView
             dataSource={this.state.dataSource}
-            renderRow={(rowData) => <PlacesListViewItem venue={rowData} price="USD270" />}
+            renderRow={this._renderRow}
          />
       )
    }

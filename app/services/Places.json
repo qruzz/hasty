@@ -1,0 +1,34 @@
+{
+   "places": [
+      {
+         "name": "Kislings",
+         "cover_photo": "https://source.unsplash.com/T6w59s84OZE/1600x900",
+         "category": "coffee_shop"
+      },
+      {
+         "name": "Flat White",
+         "cover_photo": "https://source.unsplash.com/B13cErXzDzI/1600x900",
+         "category":"coffee_shop"
+      },
+      {
+         "name": "Jamie's Italien",
+         "cover_photo": "https://source.unsplash.com/Nww_-_Ol8HY/1600x900",
+         "category": "restaurent"
+      },
+      {
+         "name": "Robata Ya",
+         "cover_photo": "https://source.unsplash.com/hwLAI5lRhdM/1600x900",
+         "category": "fine_dining"
+      },
+      {
+         "name": "Monmouth",
+         "cover_photo": "https://source.unsplash.com/ZNKdBnMx01s/1600x900",
+         "category": "coffee_shop"
+      },
+      {
+         "name": "The Peninsula Paris",
+         "cover_photo": "https://source.unsplash.com/LOLSb7m6XkU/1600x900",
+         "category": "fine_dining"
+      }
+   ]
+}
