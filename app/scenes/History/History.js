@@ -3,21 +3,62 @@ import {
    View,
    Text,
    StyleSheet,
-   SegmentedControlIOS
+   SegmentedControlIOS,
+   ListView
 } from 'react-native'
 
 import ViewContainer from '../../components/ViewContainer.js'
 import StatusbarBackground from '../../components/StatusbarBackground.js'
 import NavigationBar from '../../components/NavigationBar.js'
 
-import PlacesListView from './Places/PlacesListView.js'
+
+import ReceiptsListViewItem from './Receipts/ReceiptsListViewItem.js'
+import PlacesListViewItem from './Places/PlacesListViewItem.js'
+
+import data from '../../services/Places.json'
 
 export default class History extends Component {
    constructor(props) {
       super(props)
 
+      const ds = new ListView.DataSource({
+         rowHasChanged: (r1, r2) => {r1 !== r2}
+      })
+
       this.state = {
-         selectedIndex: 0
+         selectedIndex: 0,
+         dataSourcePlaces: ds.cloneWithRows(data.places),
+         dataSourceReceipts: ds.cloneWithRows(data)
+      }
+   }
+
+   _renderRowPlaces(rowData) {
+      return (
+         <PlacesListViewItem name={rowData.name} coverPhoto={rowData.cover_photo} />
+      )
+   }
+
+   _renderRowReceipts(rowData) {
+      return (
+         <ReceiptsListViewItem venue="Kislings" price="USD271" />
+      )
+   }
+
+   _renderView() {
+      if(this.state.selectedIndex === 0) {
+         return (
+            <ListView
+               dataSource={this.state.dataSourcePlaces}
+               renderRow={this._renderRowPlaces}
+            />
+         )
+      } else {
+         return (
+            <ListView
+               dataSource={this.state.dataSourceReceipts}
+               renderRow={this._renderRowReceipts}
+            />
+         )
       }
    }
 
@@ -41,7 +82,7 @@ export default class History extends Component {
 
             <View style={styles.hairline} />
 
-            <PlacesListView />
+            {this._renderView()}
 
          </ViewContainer>
       )

@@ -10,12 +10,22 @@ export const firebaseRef = Firebase.initializeApp(config)
 
 export const database = firebaseRef.database()
 
-// TODO: Add profile picture
 export function writeUserData(userID, firstName, lastName, email, picture) {
    database.ref('users/' + userID).set({
       first_name: firstName,
       last_name: lastName,
       email: email,
-      profile_picture: picture
+      profile_picture: picture,
+      address: '',
+      city: '',
+      state: '',
+      country: '',
+      card_information: ''
+   })
+}
+
+export function updateUserData(userID, key, value) {
+   database.ref('users/' + userID + '/' + key).transaction(function(currentKeyValue){
+      return value
    })
 }

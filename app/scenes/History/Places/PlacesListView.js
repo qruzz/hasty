@@ -19,14 +19,13 @@ export default class PlacesListView extends Component {
       })
 
       this.state = {
-         // dataSource: ds.cloneWithRows(['row 1', 'row 2'])
          dataSource: ds.cloneWithRows(data.places)
       }
    }
 
    _renderRow(rowData) {
       return (
-         <PlacesListViewItem name={rowData.name} coverPhoto={rowData.cover_photo}/>
+         <PlacesListViewItem name={rowData.name} coverPhoto={rowData.cover_photo} />
       )
    }
 

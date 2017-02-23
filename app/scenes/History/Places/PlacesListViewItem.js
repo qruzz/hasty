@@ -21,7 +21,6 @@ export default class PlacesListViewItem extends Component {
                onPress={() => {
 
                }}>
-
                <Image
                   style={styles.image}
                   source={{uri: this.props.coverPhoto}}>
@@ -46,7 +45,7 @@ export default class PlacesListViewItem extends Component {
       name: {
          backgroundColor: 'transparent',
          color: 'white',
-         fontSize: 14,
+         fontSize: 16,
          fontWeight: '600',
          marginLeft: 24,
          marginTop: 27

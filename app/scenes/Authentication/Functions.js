@@ -43,7 +43,7 @@ export function _fbAuth() {
 
             new GraphRequestManager().addRequest(infoRequest).start()
 
-            // Actions.tabbar()
+            Actions.tabbar()
          })
       }
    })
