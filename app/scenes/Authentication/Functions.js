@@ -50,12 +50,6 @@ export function _fbAuth() {
 }
 
 export function _fbSignOut() {
-   LoginManager.logout(function(error, result) {
-      if (error) {
-         console.log(error)
-      } else {
-         Actions.authentication()
-      }
-
-   })
+   LoginManager.logOut()
+   Actions.authentication()
 }

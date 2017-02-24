@@ -25,8 +25,7 @@ export default class PlacesListViewItem extends Component {
                onPress={() => {
                   Actions.selectedPlace({
                      title: this.props.name,
-                     coverPhoto: this.props.coverPhoto,
-                     back: 1
+                     coverPhoto: this.props.coverPhoto
                   })
                }}>
                <Image

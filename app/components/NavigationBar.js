@@ -8,21 +8,10 @@ export default class NavigationBar extends Component {
       super(props)
    }
 
-   _renderBackButton() {
-      if (this.props.back === 1) {
-         return (
-            <View>
-               <Text>Back</Text>
-            </View>
-         )
-      }
-   }
-
     render() {
         return (
            <View style={styles.navbar}>
-             {this._renderBackButton()}
-             <Text style={styles.navbarText}>{this.props.title} {this.props.back}</Text>
+             <Text style={styles.navbarText}>{this.props.title}</Text>
            </View>
         )
     }
