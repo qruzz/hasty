@@ -18,9 +18,9 @@ export function writeUserData(userID, firstName, lastName, email, picture) {
       profile_picture: picture,
       address: '',
       city: '',
-      state: '',
+      area: '',
       country: '',
-      card_information: ''
+      card: ''
    })
 }
 

@@ -14,10 +14,11 @@ export default class PaymentItem extends Component {
       super(props)
 
       this.state = {
-         input: 'input'
+         input: ''
       }
    }
-
+   
+   // TODO: Append users with + userID: '/users/' + userID
    componentDidMount() {
       database.ref('/users/10212492588289260').once('value').then(function(snapshot) {
          if (this.props.identifier == "address") {
@@ -50,8 +51,8 @@ export default class PaymentItem extends Component {
             <Text style={styles.type}>{this.props.type}</Text>
             <TextInput
                style={styles.input}
-               defaultValue={this.props.value}
                value={this.state.input}
+               placeholder="input"
                onFocus={() => {
                   this.setState({input: ''})
                }}

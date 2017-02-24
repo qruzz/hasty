@@ -4,14 +4,18 @@ import {
    Text,
    StyleSheet,
    Image,
-   TouchableOpacity
+   TouchableOpacity,
+   AlertIOS
 } from 'react-native'
 
-import { Action } from 'react-native-router-flux'
+import { Actions } from 'react-native-router-flux'
+
+import SelectedPlacesView from './SelectedPlacesView.js'
 
 export default class PlacesListViewItem extends Component {
    constructor(props) {
       super(props)
+
    }
 
    render() {
@@ -19,7 +23,11 @@ export default class PlacesListViewItem extends Component {
          <View style={styles.container}>
             <TouchableOpacity
                onPress={() => {
-
+                  Actions.selectedPlace({
+                     title: this.props.name,
+                     coverPhoto: this.props.coverPhoto,
+                     back: 1
+                  })
                }}>
                <Image
                   style={styles.image}

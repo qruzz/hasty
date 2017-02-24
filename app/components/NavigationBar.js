@@ -1,11 +1,28 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
+import { Actions } from 'react-native-router-flux'
+
 export default class NavigationBar extends Component {
+   constructor(props) {
+      super(props)
+   }
+
+   _renderBackButton() {
+      if (this.props.back === 1) {
+         return (
+            <View>
+               <Text>Back</Text>
+            </View>
+         )
+      }
+   }
+
     render() {
         return (
            <View style={styles.navbar}>
-             <Text style={styles.navbarText}>{this.props.title}</Text>
+             {this._renderBackButton()}
+             <Text style={styles.navbarText}>{this.props.title} {this.props.back}</Text>
            </View>
         )
     }

@@ -10,6 +10,7 @@ import { Router, Scene } from 'react-native-router-flux'
 
 // user defined scenes, components, and services
 import Authentication from './scenes/Authentication/Authentication.js'
+import SelectedPlacesView from './scenes/History/Places/SelectedPlacesView.js'
 import TabBar from './scenes/TabBar.js'
 
 export default class App extends Component {
@@ -26,6 +27,12 @@ export default class App extends Component {
                   key={'tabbar'}
                   component={TabBar}
                   initial={true}
+                  hideNavBar={true} />
+               <Scene
+                  key={'selectedPlace'}
+                  direction="vertical"
+                  component={SelectedPlacesView}
+                  // initial={true}
                   hideNavBar={true} />
             </Scene>
          </Router>

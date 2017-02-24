@@ -1,12 +1,21 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
+import {
+   View,
+   TouchableOpacity,
+   Text,
+   StyleSheet
+} from 'react-native'
+
+import { _fbSignOut } from '../Authentication/Functions.js'
 
 export default class ProfileActions extends Component {
     render() {
         return (
            <View style={styles.actions}>
              <View style={styles.buttons}>
-                 <TouchableOpacity style={styles.buttonContainer}>
+                 <TouchableOpacity
+                    style={styles.buttonContainer}
+                    onPress={_fbSignOut}>
                     <Text style={styles.signOut}>Sign Out</Text>
                  </TouchableOpacity>
                  <TouchableOpacity style={styles.buttonContainer}>
