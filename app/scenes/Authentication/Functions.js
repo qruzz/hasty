@@ -23,7 +23,6 @@ export function _fbAuth() {
                   console.log(error)
                } else {
                   userID = result.id
-                  // TODO: Make a test to see if the user exist, if - update rather than write
                   writeUserData(result.id, result.first_name, result.last_name, result.email, result.picture.data.url)
                }
             }

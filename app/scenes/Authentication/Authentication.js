@@ -18,6 +18,7 @@ import FBSDK, {
 
 // user defined scenes, components, and services
 import ViewContainer from '../../components/ViewContainer.js'
+import StatusbarBackground from '../../components/StatusbarBackground.js'
 import { _fbAuth } from './Functions.js'
 
 export default class Authentication extends Component {
@@ -28,9 +29,11 @@ export default class Authentication extends Component {
    render() {
       return (
          <ViewContainer>
-            {/* <View style={styles.logo}>
-               <Image source={require("../../resources/logo.png")} />
-            </View> */}
+            <StatusbarBackground />
+            <View style={styles.logoContainer}>
+               <Image style={styles.logo} source={require("../../resources/icon.png")} />
+               <Image style={styles.name} source={require("../../resources/logo1@4x.png")} />
+            </View>
 
             <View style={styles.container}>
                <TouchableOpacity style={styles.loginButton} onPress={_fbAuth}>
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
    container: {
       height: 50,
       alignItems: 'center',
-      marginTop: 550
+      marginTop: 300
    },
    loginButton: {
       flexDirection: 'row'
@@ -58,5 +61,16 @@ const styles = StyleSheet.create({
       fontWeight: '400',
       paddingTop: 15,
       paddingLeft: 15
+   },
+   logoContainer: {
+      alignItems: 'center'
+   },
+   logo: {
+      marginTop: 150,
+      height: 100,
+      width: 100
+   },
+   name: {
+      marginTop: 20
    }
 })
