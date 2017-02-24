@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 
 import { updateUserData, database } from '../services/Firebase.js'
+import FBSDK, { AccessToken } from 'react-native-fbsdk'
 
 export default class PaymentItem extends Component {
 
@@ -14,35 +15,40 @@ export default class PaymentItem extends Component {
       super(props)
 
       this.state = {
-         input: ''
+         input: '',
+         userID: ''
       }
    }
-   
-   // TODO: Append users with + userID: '/users/' + userID
+
    componentDidMount() {
-      database.ref('/users/10212492588289260').once('value').then(function(snapshot) {
-         if (this.props.identifier == "address") {
-            if (snapshot.val().address !== "") {
-               this.setState({input: snapshot.val().address})
+      AccessToken.getCurrentAccessToken().then(function(accessTokenData) {
+         let userID = accessTokenData.getUserId()
+         this.setState({userID: accessTokenData.getUserId()})
+         database.ref('/users/' + userID).once('value').then(function(snapshot) {
+            if (this.props.identifier == "address") {
+               if (snapshot.val().address !== "") {
+                  this.setState({input: snapshot.val().address})
+               }
+            } else if (this.props.identifier == "city") {
+               if (snapshot.val().city !== "") {
+                  this.setState({input: snapshot.val().city})
+               }
+            } else if (this.props.identifier == "area") {
+               if (snapshot.val().area !== "") {
+                  this.setState({input: snapshot.val().area})
+               }
+            } else if (this.props.identifier == "country") {
+               if (snapshot.val().country !== "") {
+                  this.setState({input: snapshot.val().country})
+               }
+            } else if (this.props.identifier == "card") {
+               if (snapshot.val().card !== "") {
+                  this.setState({input: snapshot.val().card})
+               }
             }
-         } else if (this.props.identifier == "city") {
-            if (snapshot.val().city !== "") {
-               this.setState({input: snapshot.val().city})
-            }
-         } else if (this.props.identifier == "area") {
-            if (snapshot.val().area !== "") {
-               this.setState({input: snapshot.val().area})
-            }
-         } else if (this.props.identifier == "country") {
-            if (snapshot.val().country !== "") {
-               this.setState({input: snapshot.val().country})
-            }
-         } else if (this.props.identifier == "card") {
-            if (snapshot.val().card !== "") {
-               this.setState({input: snapshot.val().card})
-            }
-         }
+         }.bind(this))
       }.bind(this))
+
    }
 
    render() {
@@ -59,11 +65,10 @@ export default class PaymentItem extends Component {
                onChangeText={(text) => {
                   this.setState({input: text})
                }}
-               // TODO: import the userID of logged in user
                onEndEditing={() => {
                   console.log(this.props.identifier)
                   console.log(this.state.input)
-                  updateUserData('10212492588289260', this.props.identifier, this.state.input)
+                  updateUserData(this.state.userID, this.props.identifier, this.state.input)
                }}
             />
          </View>

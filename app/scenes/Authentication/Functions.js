@@ -1,4 +1,4 @@
-import { writeUserData } from '../../services/Firebase.js'
+import { writeUserData, deleteUserData } from '../../services/Firebase.js'
 
 import { Actions } from 'react-native-router-flux'
 
@@ -42,7 +42,6 @@ export function _fbAuth() {
             )
 
             new GraphRequestManager().addRequest(infoRequest).start()
-
             Actions.tabbar()
          })
       }
@@ -52,4 +51,8 @@ export function _fbAuth() {
 export function _fbSignOut() {
    LoginManager.logOut()
    Actions.authentication()
+}
+
+export function _deleteAccount() {
+   deleteUserData(userID)
 }

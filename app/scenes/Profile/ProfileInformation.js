@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { View, Image, Text, StyleSheet } from 'react-native'
 
 import { database } from '../../services/Firebase.js'
-import { userID } from '../Authentication/Functions.js'
+// import { userID } from '../Authentication/Functions.js'
+import FBSDK, { AccessToken } from 'react-native-fbsdk'
 
 export default class ProfileInformation extends Component {
    constructor(props) {
@@ -13,12 +14,17 @@ export default class ProfileInformation extends Component {
          lastName: '',
          picture: ''
       }
+   }
 
-      // TODO: Append users with + userID: '/users/' + userID
-      database.ref('/users/10212492588289260').once('value').then(function(snapshot) {
-         this.setState({firstName: snapshot.val().first_name})
-         this.setState({lastName: snapshot.val().last_name})
-         this.setState({picture: snapshot.val().profile_picture})
+   componentDidMount() {
+      AccessToken.getCurrentAccessToken().then(function(accessTokenData) {
+         let userID = accessTokenData.getUserId()
+
+         database.ref('/users/' + userID).once('value').then(function(snapshot) {
+            this.setState({firstName: snapshot.val().first_name})
+            this.setState({lastName: snapshot.val().last_name})
+            this.setState({picture: snapshot.val().profile_picture})
+         }.bind(this))
       }.bind(this))
    }
 

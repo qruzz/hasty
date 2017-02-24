@@ -21,12 +21,12 @@ export default class App extends Component {
                <Scene
                   key={'authentication'}
                   component={Authentication}
-                  // initial={true}
+                  initial={true}
                   hideNavBar={true} />
                <Scene
                   key={'tabbar'}
                   component={TabBar}
-                  initial={true}
+                  // initial={true}
                   hideNavBar={true} />
                <Scene
                   key={'selectedPlace'}

@@ -3,12 +3,14 @@ import {
    View,
    TouchableOpacity,
    Text,
-   StyleSheet
+   StyleSheet,
+   AlertIOS
 } from 'react-native'
 
-import { _fbSignOut } from '../Authentication/Functions.js'
+import { _fbSignOut, _deleteAccount } from '../Authentication/Functions.js'
 
 export default class ProfileActions extends Component {
+
     render() {
         return (
            <View style={styles.actions}>
@@ -18,7 +20,18 @@ export default class ProfileActions extends Component {
                     onPress={_fbSignOut}>
                     <Text style={styles.signOut}>Sign Out</Text>
                  </TouchableOpacity>
-                 <TouchableOpacity style={styles.buttonContainer}>
+                 <TouchableOpacity
+                    style={styles.buttonContainer}
+                    onPress={() => {
+                       AlertIOS.alert(
+                          "Are you sure you want to delete your account?",
+                          null,
+                          [
+                             {text: 'Hell No!'},
+                             {text: 'Yes Please!', onPress: _deleteAccount}
+                          ]
+                       )
+                    }}>
                     <Text style={styles.deleteAccount}>Delete Account</Text>
                  </TouchableOpacity>
              </View>
