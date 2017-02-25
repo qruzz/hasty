@@ -11,6 +11,7 @@ import MapView from 'react-native-maps'
 
 // user defined scenes, components, and services
 import ViewContainer from '../../components/ViewContainer.js'
+import PlacesListViewItem from '../History/Places/PlacesListViewItem.js'
 
 const { width, height } = Dimensions.get('window')
 const SCREEN_WIDTH = width
@@ -109,6 +110,12 @@ export default class Location extends Component {
                   </View>
                </MapView.Marker>
             </MapView>
+            <View style={styles.placesContainer}>
+               <View style={styles.placesList}>
+                  <Text style={styles.nearby}>NEARBY</Text>
+                  <PlacesListViewItem name="Testing" coverPhoto="https://source.unsplash.com/random" />
+               </View>
+            </View>
          </View>
       )
    }
@@ -117,7 +124,9 @@ export default class Location extends Component {
 const styles = StyleSheet.create({
    container: {
       position: 'relative',
-      height: SCREEN_HEIGHT - 40
+      height: SCREEN_HEIGHT - 40,
+      justifyContent: 'flex-end',
+      alignItems: 'stretch',
    },
    map: {
       left: 0,
@@ -127,13 +136,13 @@ const styles = StyleSheet.create({
       position: 'absolute'
    },
    radius: {
-      height: 40,
-      width: 40,
-      borderRadius: 40 / 2,
+      height: 50,
+      width: 50,
+      borderRadius: 50 / 2,
       overflow: 'hidden',
       backgroundColor: 'rgba(0,122,255,0.1)',
       borderWidth: 1,
-      borderColor: 'rgba(0,122,255,0.4)',
+      borderColor: 'rgba(0,122,255,0.3)',
       alignItems: 'center',
       justifyContent: 'center'
    },
@@ -145,5 +154,20 @@ const styles = StyleSheet.create({
       borderRadius: 20 / 2,
       overflow: 'hidden',
       backgroundColor: '#007AFF'
+   },
+   placesContainer: {
+      backgroundColor: 'transparent',
+      alignItems: 'stretch'
+   },
+   placesList: {
+      backgroundColor: 'white',
+      height: 150,
+      paddingTop: 8.5,
+      borderRadius: 20,
+   },
+   nearby: {
+      marginLeft: 15,
+      marginBottom: 18.5,
+      color: '#c8c7cc'
    }
 })

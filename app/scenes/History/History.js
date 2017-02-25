@@ -10,26 +10,34 @@ import {
 import ViewContainer from '../../components/ViewContainer.js'
 import StatusbarBackground from '../../components/StatusbarBackground.js'
 import NavigationBar from '../../components/NavigationBar.js'
-
-
 import ReceiptsListViewItem from './Receipts/ReceiptsListViewItem.js'
 import PlacesListViewItem from './Places/PlacesListViewItem.js'
 
+import { database } from '../../services/Firebase.js'
+
 import data from '../../services/Places.json'
+
+const ds = new ListView.DataSource({
+   rowHasChanged: (r1, r2) => {r1 !== r2}
+})
 
 export default class History extends Component {
    constructor(props) {
       super(props)
 
-      const ds = new ListView.DataSource({
-         rowHasChanged: (r1, r2) => {r1 !== r2}
-      })
-
       this.state = {
          selectedIndex: 0,
-         dataSourcePlaces: ds.cloneWithRows(data.places),
+         dataSourcePlaces: ds.cloneWithRows(['row 1', 'row 2']),
          dataSourceReceipts: ds.cloneWithRows(data)
       }
+   }
+
+   componentDidMount() {
+      database.ref('places/').once('value').then(function(snapshot) {
+         this.setState({
+            dataSourcePlaces: ds.cloneWithRows(snapshot.val())
+         })
+      }.bind(this))
    }
 
    _renderRowPlaces(rowData) {

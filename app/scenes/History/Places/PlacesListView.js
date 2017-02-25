@@ -7,6 +7,9 @@ import {
 } from 'react-native'
 
 import data from '../../../services/Places.json'
+import { database } from '../../../services/Firebase.js'
+
+import FBSDK, { AccessToken } from 'react-native-fbsdk'
 
 import PlacesListViewItem from './PlacesListViewItem.js'
 
@@ -22,6 +25,14 @@ export default class PlacesListView extends Component {
          dataSource: ds.cloneWithRows(data.places)
       }
    }
+
+   // componentDidMount() {
+   //    database.ref('places/').once('value').then(function(snapshot) {
+   //       this.setState({
+   //          dataSource: ds.cloneWithRows(snapshot.val())
+   //       })
+   //    })
+   // }
 
    _renderRow(rowData) {
       return (
