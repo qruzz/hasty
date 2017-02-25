@@ -11,6 +11,8 @@ import {
 import ViewContainer from '../../../components/ViewContainer.js'
 import StatusbarBackground from '../../../components/StatusbarBackground.js'
 import NavigationBar from '../../../components/NavigationBar.js'
+import PlacesViewRewards from '../../../components/PlacesViewRewards.js'
+import SelectedPlacesListViewItem from './SelectedPlacesListViewItem.js'
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux'
@@ -24,13 +26,13 @@ export default class SelectedPlacesView extends Component {
       })
 
       this.state = {
-         dataSource: ds.cloneWithRows(['row 1', 'row 2'])
+         dataSource: ds.cloneWithRows(['row 1', 'row 2', 'row 3'])
       }
    }
 
    _renderRow(rowData) {
       return (
-         <View><Text>{rowData}</Text></View>
+         <SelectedPlacesListViewItem />
       )
    }
 
@@ -54,12 +56,16 @@ export default class SelectedPlacesView extends Component {
                   />
                </View>
                <View style={styles.rewards}>
-
+                  <PlacesViewRewards />
                </View>
-               <ListView
-                  dataSource={this.state.dataSource}
-                  renderRow={this._renderRow}
-               />
+               <View style={styles.listView}>
+                  <Text style={styles.history}>HISTORY</Text>
+
+                  <ListView
+                     dataSource={this.state.dataSource}
+                     renderRow={this._renderRow}
+                  />
+               </View>
             </View>
          </ViewContainer>
       )
@@ -89,5 +95,13 @@ const styles = StyleSheet.create({
    exit: {
       marginLeft: 20,
       alignSelf: 'flex-start'
+   },
+   listView: {
+      marginLeft: 20,
+      marginRight: 20
+   },
+   history: {
+      color: '#c8c7cc',
+      marginBottom: 15
    }
 })

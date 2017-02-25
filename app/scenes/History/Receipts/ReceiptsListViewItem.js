@@ -52,6 +52,5 @@ const styles = StyleSheet.create({
       fontSize: 17,
       color: '#8f8e94',
       marginRight: 12
-   },
-
+   }
 })
